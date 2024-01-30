@@ -27,3 +27,6 @@ class Salgrade(models.Model):
     grade=models.IntegerField(primary_key=True)
     losal=models.DecimalField(max_digits=10,decimal_places=2)
     hisal=models.DecimalField(max_digits=10,decimal_places=2)
+
+    def __str__(self):
+        return f"Lowsal is: {self.losal}"
