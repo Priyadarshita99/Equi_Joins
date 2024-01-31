@@ -44,8 +44,12 @@
                     <td>{{emp.job}}</td>                   
                     <td>{{emp.mgr.empno}}</td>                
                     <td>{{emp.hiredate}}</td>
-                    <td>{{emp.sal}}</td>                   
-                    <td>{{emp.comm}}</td>
+                    <td>{{emp.sal}}</td>     
+                    {% if emp.comm %}              
+                        <td>{{emp.comm}}</td>
+                    {% else %}
+                        <td>    </td>
+                    {% endif %}
                     <td>{{emp.deptno.deptno}}</td>
                     <td>{{emp.deptno.dname}}</td>
                     <td>{{emp.deptno.dlocation}}</td>
@@ -54,4 +58,4 @@
         </table>
     </center>
 </body>
-</html>
+</html> 
