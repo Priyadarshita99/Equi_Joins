@@ -31,9 +31,7 @@ def equijoins(request):
     EMPOBJECTS=Emp.objects.select_related('deptno').filter(Q(job='ANALYST') | Q(hiredate__year=1987))
     EMPOBJECTS=Emp.objects.select_related('deptno').filter(ename__contains='R')
     
-
     #EMPOBJECTS=Emp.objects.select_related('deptno').all()
 
     d={'EMPOBJECTS':EMPOBJECTS}
     return render(request,'equijoins.html',d)
-
