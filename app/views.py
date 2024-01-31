@@ -35,3 +35,24 @@ def equijoins(request):
 
     d={'EMPOBJECTS':EMPOBJECTS}
     return render(request,'equijoins.html',d)
+
+def selfjoins(request):
+    empmgro=Emp.objects.select_related('mgr').all()
+    empmgro=Emp.objects.select_related('mgr').filter(mgr__ename='KING')
+    empmgro=Emp.objects.select_related('mgr').filter(sal__gte=2500)
+    empmgro=Emp.objects.select_related('mgr').filter(mgr__isnull=False,mgr__ename='BLAKE')
+    empmgro=Emp.objects.select_related('mgr').order_by(Length('ename'))
+    empmgro=Emp.objects.select_related('mgr').filter(ename__regex=r'^A')
+    empmgro=Emp.objects.select_related('mgr').filter(ename__regex=r'\w{5}')
+    empmgro=Emp.objects.select_related('mgr').filter(job__endswith='MAN')
+    empmgro=Emp.objects.select_related('mgr').filter(hiredate__month='12')
+    empmgro=Emp.objects.select_related('mgr').filter(job='ANALYST')
+    empmgro=Emp.objects.select_related('mgr').all()[:3]
+    empmgro=Emp.objects.select_related('mgr').filter(comm__isnull=False)
+    empmgro=Emp.objects.select_related('mgr').filter(hiredate__year=1981)
+    empmgro=Emp.objects.select_related('mgr').filter(comm__isnull=True)
+    empmgro=Emp.objects.select_related('mgr').filter(Q(job='MANAGER') & Q(sal__gt=2000))
+    empmgro=Emp.objects.select_related('mgr').filter(mgr__ename__regex=r'E$')
+
+    d={'empmgro':empmgro}
+    return render(request,'selfjoins.html',d)

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selfjoin</title>
+    <style>
+        table,th,td 
+	    {
+		border-collapse: collapse;   
+		border:2px solid black;
+	    }
+        th
+        {
+            color:crimson;
+            font-size: larger;
+        }
+        th,td 
+	    {
+		padding: 8px;
+	    }
+    </style>
+</head>
+<body>
+    <center>
+        <h1 style="color: blue;">Selfjoins:-</h1>
+        <table border="2px">
+            <tr>
+                <th>Ename</th>
+                <th>MgrName</th>
+                <th>Sal</th>
+            </tr>
+            {% for eo in empmgro %}
+            <tr>
+                <td>{{eo.ename}}</td>
+                <td>{{eo.mgr.ename}}</td>
+                <td>{{eo.sal}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </center>
+</body>
+</html>
