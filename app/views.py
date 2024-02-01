@@ -56,3 +56,45 @@ def selfjoins(request):
 
     d={'empmgro':empmgro}
     return render(request,'selfjoins.html',d)
+
+def emp_mgr_dept(request):
+    emd=Emp.objects.select_related('deptno','mgr').all()
+    emd=Emp.objects.select_related('deptno','mgr').filter(deptno__dname='RESEARCH')
+    emd=Emp.objects.select_related('deptno','mgr').filter(mgr__ename='JONES')
+    emd=Emp.objects.select_related('deptno','mgr').filter(Q(job='MANAGER') & Q(sal__gt=2000))
+    emd=Emp.objects.select_related('deptno','mgr').filter(hiredate__year=1981)
+    emd=Emp.objects.select_related('deptno','mgr').filter(Q(deptno__dname='RESEARCH') | Q(mgr__ename='JONES'))
+    emd=Emp.objects.select_related('deptno','mgr').filter(comm__isnull=True)
+    emd=Emp.objects.select_related('deptno','mgr').filter(deptno__dname__regex=r'\w{10}')
+    emd=Emp.objects.select_related('deptno','mgr').filter(Q(deptno__deptno=20) | Q(deptno__dlocation='DALLAS'))
+    emd=Emp.objects.select_related('deptno','mgr').all()[:6]
+    emd=Emp.objects.select_related('deptno','mgr').filter(deptno__dlocation__contains='Y')
+
+    emd=Emp.objects.select_related('deptno','mgr').filter(ename__startswith='A')
+    emd=Emp.objects.select_related('deptno','mgr').filter(job__endswith='MAN')
+    emd=Emp.objects.select_related('deptno','mgr').filter(comm__isnull=False)
+    emd=Emp.objects.select_related('deptno','mgr').filter(hiredate__year=1981,deptno=10)
+    emd=Emp.objects.select_related('deptno','mgr').filter(job='MANAGER')
+    emd=Emp.objects.select_related('deptno','mgr').filter(sal__gte=2500)
+    emd=Emp.objects.select_related('deptno','mgr').filter(hiredate__month='12')
+    emd=Emp.objects.select_related('deptno','mgr').filter(job='CLERK')
+    emd=Emp.objects.select_related('deptno','mgr').filter(mgr__isnull=False,mgr__ename='BLAKE')
+    emd=Emp.objects.select_related('deptno','mgr').filter(Q(deptno__deptno=10) | Q(ename='ALLEN'))
+
+    emd=Emp.objects.select_related('deptno','mgr').filter(Q(deptno__dlocation='BOSTON') | Q(sal__gte=3000))
+    emd=Emp.objects.select_related('deptno','mgr').order_by(Length('deptno__dname'))
+    emd=Emp.objects.select_related('deptno','mgr').filter(deptno__dname__regex=r'S$')
+    emd=Emp.objects.select_related('deptno','mgr').order_by('ename')
+    emd=Emp.objects.select_related('deptno','mgr').order_by('-deptno__dname')
+    emd=Emp.objects.select_related('deptno','mgr').order_by(Length('deptno__dname').desc())
+    emd=Emp.objects.select_related('deptno','mgr').filter(mgr__deptno__deptno=20)
+    emd=Emp.objects.select_related('deptno','mgr').filter(Q(deptno__dname='SALES') | Q(ename='ALLEN'))
+    emd=Emp.objects.select_related('deptno','mgr').filter(Q(deptno__deptno=10) & Q(mgr__ename='KING'))
+    emd=Emp.objects.select_related('deptno','mgr').filter(Q(sal__gt=3000) | Q(ename='ALLEN'))
+    emd=Emp.objects.select_related('deptno','mgr').filter(Q(hiredate__month=4) | Q(job='MANAGER'))
+    emd=Emp.objects.select_related('deptno','mgr').filter(deptno__dlocation__startswith='NE')
+    emd=Emp.objects.select_related('deptno','mgr').filter(deptno__dname__regex=r'^R\w{7}')
+    emd=Emp.objects.select_related('deptno','mgr').order_by('deptno__dlocation')
+
+    d={'emd':emd}
+    return render(request,'emp_mgr_dept.html',d)
