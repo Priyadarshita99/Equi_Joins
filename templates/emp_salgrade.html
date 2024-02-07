@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>emp_salgrade</title>
+    <style>
+        table,th,td 
+	    {
+		border-collapse: collapse;   
+		border:2px solid black;
+	    }
+        th
+        {
+            color:crimson;
+            font-size: larger;
+        }
+        th,td 
+	    {
+		padding: 8px;
+	    }
+    </style>
+</head>
+<body>
+    <center>
+        <h1 style="color: blue;">Emp_Salgrade:-</h1>
+        <table border="2px">
+            <tr>
+                <th>Empno</th>
+                <th>Ename</th>
+                <th>Salary</th>
+                <th>Grade</th>
+            </tr>
+            {% for eo in EO %}
+            <tr>
+                <td>{{eo.empno}}</td>
+                <td>{{eo.ename}}</td>
+                <td>{{eo.sal}}</td>
+
+                    {% for so in SO %}
+                        {% if eo.sal >= so.losal and eo.sal <= so.hisal %}
+                            <td>{{so.grade}}</td>
+                        {% endif %}
+                    {% endfor %}
+
+            </tr>
+            {% endfor %}
+        </table>
+    </center>
+</body>
+</html>
